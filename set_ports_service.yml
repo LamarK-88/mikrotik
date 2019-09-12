@@ -1,0 +1,11 @@
+---
+- hosts: RouterOS
+  gather_facts: false
+  become_method: sudo
+  tasks:
+   - name: Set port SSH services
+     routeros_command:
+      commands: /ip service set port=64522 ssh
+   - name: Set port FTP services
+     routeros_command:
+      commands: /ip service set port=64521 ftp

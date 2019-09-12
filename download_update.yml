@@ -1,0 +1,26 @@
+---
+- hosts: RouterOS_Cloud
+  gather_facts: false
+  become_method: sudo
+  tasks:
+   - name: Check-for-updates
+     routeros_command:
+      commands: /system package update check-for-updates
+     register: info_update
+
+   - name: print version
+     debug:
+      var: info_update.stdout_lines
+     
+   - name: Download update
+     routeros_command:
+      commands: /system package update download
+
+   - name: Print file update
+     routeros_command:
+      commands: /file print detail where type=package
+     register: file_update
+   
+   - name: Print version download file
+     debug:
+      var: file_update.stdout_lines

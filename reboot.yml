@@ -1,0 +1,17 @@
+---
+- hosts: RouterOS_CAPs
+  gather_facts: false
+  become_method: sudo
+  vars_prompt:
+   - name: date
+     prompt: "Enter date start up (Aug/27/2019):"
+     private: no
+   - name: time
+     prompt: "Enter time start up  (13:25:00):"
+     private: no
+
+
+  tasks:
+   - name: set schedule
+     routeros_command:
+      commands: /system scheduler set name=scheduler-reboot start-date={{ date }} start-time={{ time }} on-event=reboot numbers=0

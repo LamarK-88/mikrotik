@@ -1,0 +1,8 @@
+---
+- hosts: RouterOS
+  gather_facts: false
+  become_method: sudo
+  tasks:
+   - name: Enable SNMP
+     routeros_command:
+      commands: /snmp set enabled=yes trap-community=public trap-version=2 trap-generators=interfaces,temp-exception,start-trap trap-interfaces=all

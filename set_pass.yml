@@ -1,0 +1,8 @@
+---
+- hosts: RouterOS
+  gather_facts: false
+  become_method: sudo
+  tasks:
+   - name: Set password
+     routeros_command:
+      commands: /user set cun password="12345678"

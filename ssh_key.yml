@@ -1,0 +1,14 @@
+---
+- hosts: RouterOS
+  gather_facts: false
+  become_method: sudo
+  tasks:
+   - name: Copy file with owner and permissions
+     net_put:
+      src: ./id_rsa.pub
+      protocol: sftp
+   - name: Install key for ssh
+     routeros_command:
+      commands: /user ssh-keys import user=cun public-key-file=id_rsa.pub
+
+ 

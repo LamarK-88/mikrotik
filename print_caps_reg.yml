@@ -1,0 +1,12 @@
+---
+- hosts: CAPs1
+  gather_facts: false
+  become_method: sudo
+  tasks:
+  - name: Print registration stations
+    routeros_command:
+     commands: /caps-man registration-table print
+    register: system_print
+  - name: print
+    debug:
+     var: system_print.stdout_lines

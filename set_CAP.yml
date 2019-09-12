@@ -1,0 +1,22 @@
+---
+- hosts: RouterOS_CAPs
+  gather_facts: false
+  become_method: sudo
+  vars_prompt:
+   - name: ether
+     prompt: "Enter interfaces (ether1):"
+     private: no
+     default: ether1
+   - name: ip
+     prompt: "Enter caps-man-addresses(192.168.222.1):"
+     private: no
+     default: 192.168.222.1
+   - name: names
+     prompt: "Enter caps-man-name(head):"
+     private: no
+     default: head
+  
+  tasks:
+   - name: set CAP
+     routeros_command:
+      commands: /interface wireless cap set caps-man-addresses={{ ip }} caps-man-names={{ names }} discovery-interfaces={{ ether }} enabled=yes bridge=none certificate=none
